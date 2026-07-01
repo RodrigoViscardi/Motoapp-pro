@@ -4,7 +4,6 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name=".MotoAppApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="MotoApp Pro"
