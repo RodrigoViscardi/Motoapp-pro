@@ -132,15 +132,16 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
             val alocacoes = mutableListOf<Alocacao>()
             val caixinhas = state.caixinhas.map { it.copy() }.toMutableList()
             var saldo = state.carteira
-            val ordenadas = caixinhas.sortedBy { it.prioridade }
+            val indicesPorPrioridade = caixinhas.indices.sortedBy { caixinhas[it].prioridade }
 
-            for (cx in ordenadas) {
+            for (i in indicesPorPrioridade) {
                 if (saldo <= 0) break
+                val cx = caixinhas[i]
                 if (cx.valorTotal <= 0) continue
                 val falta = cx.valorTotal - cx.saldoAtual
                 if (falta <= 0) continue
                 val valor = saldo.coerceAtMost(falta)
-                cx.saldoAtual += valor
+                caixinhas[i] = cx.copy(saldoAtual = cx.saldoAtual + valor)
                 saldo -= valor
                 alocacoes.add(Alocacao(cx.id, valor, valor >= falta))
             }

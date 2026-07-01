@@ -49,8 +49,8 @@ fun RelatoriosScreen(
         val filtradas = transacoes.filter { tx ->
             when (periodo) {
                 "hoje" -> tx.data == DateUtils.today()
-                "semana" -> tx.data >= DateUtils.inicioDaSemana()
-                "mes" -> tx.data >= DateUtils.inicioDoMes()
+                "semana" -> tx.timestamp >= DateUtils.inicioDaSemana()
+                "mes" -> tx.timestamp >= DateUtils.inicioDoMes()
                 else -> true
             }
         }

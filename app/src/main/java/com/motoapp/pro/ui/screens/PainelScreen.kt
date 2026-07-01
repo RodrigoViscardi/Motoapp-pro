@@ -133,10 +133,12 @@ fun PainelScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .clip(RoundedCornerShape(12.dp))
-                .background(
-                    if (carteira > 0) androidx.compose.ui.graphics.Brush.horizontalGradient(
-                        listOf(Success, Success.copy(alpha = 0.8f))
-                    ) else SurfaceVariant
+                .then(
+                    if (carteira > 0) Modifier.background(
+                        androidx.compose.ui.graphics.Brush.horizontalGradient(
+                            listOf(Success, Success.copy(alpha = 0.8f))
+                        )
+                    ) else Modifier.background(SurfaceVariant)
                 )
                 .clickable(enabled = carteira > 0, onClick = onDistribuir)
                 .padding(vertical = 14.dp),

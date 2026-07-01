@@ -28,7 +28,7 @@ fun UrgenciaScreen(
 ) {
     val hoje = DateUtils.today()
     val gastos30d = transacoes
-        .filter { it.tipo == "SAIDA" && it.data >= hoje - 30 }
+        .filter { it.tipo == "SAIDA" && it.timestamp >= DateUtils.inicioDoDia() - 30 * 86400000L }
         .sumOf { it.valor }
     val gastoDiarioMedio = if (gastos30d > 0) gastos30d / 30 else 0
     val diasSobrevivencia = if (gastoDiarioMedio > 0) carteira / gastoDiarioMedio else 0
