@@ -28,19 +28,21 @@ fun ModalSheet(
         enter = slideInVertically { it },
         exit = slideOutVertically { it }
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Background.copy(alpha = 0.6f))
-                .clickable(onClick = onDismiss)
-        ) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            // Backdrop — clickable only on the area NOT covered by content
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Background.copy(alpha = 0.6f))
+                    .clickable(onClick = onDismiss)
+            )
+            // Content — sibling of backdrop, so touch events don't get intercepted
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .fillMaxWidth()
                     .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
                     .background(Surface)
-                    .clickable(enabled = false) {}
             ) {
                 Column(
                     modifier = Modifier
