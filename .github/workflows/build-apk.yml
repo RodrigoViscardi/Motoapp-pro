@@ -27,20 +27,20 @@ jobs:
       - name: Setup Android SDK
         uses: android-actions/setup-android@v3
 
-      - name: Build Release APK
-        run: gradle assembleRelease
+      - name: Build Debug APK
+        run: gradle assembleDebug
         env:
           GRADLE_OPTS: -Dorg.gradle.daemon=false
 
       - name: Locate APK
         run: |
           echo "Looking for APK..."
-          find app/build -name "*.apk" 2>/dev/null || echo "No APK found in app/build"
-          ls -la app/build/outputs/apk/release/ 2>/dev/null || echo "No release dir"
+          find app/build -name "*.apk" 2>/dev/null || echo "No APK found"
+          ls -la app/build/outputs/apk/debug/ 2>/dev/null || echo "No debug dir"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: MotoApp-Pro-v1.0.0
-          path: app/build/outputs/apk/release/*.apk
+          path: app/build/outputs/apk/debug/*.apk
           compression-level: 0
